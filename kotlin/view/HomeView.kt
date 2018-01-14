@@ -8,7 +8,7 @@ import util.PageContext
 
 class HomeView(div: HTMLDivElement): AbstractView(div) {
 
-    override fun initialMarkup(): String {
+    override fun markup(): String {
         println("Setting up initial markup for HomeView!")
         return """
             <div id="HomeContent">

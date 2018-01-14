@@ -9,7 +9,7 @@ class CanvasView(div: HTMLDivElement, val signalRController: SignalRController) 
 
     private lateinit var canvas: HTMLCanvasElement
 
-    override fun initialMarkup(): String {
+    override fun markup(): String {
         return """
             <div id="CanvasContent">
                 <canvas id="Canvas"></canvas>

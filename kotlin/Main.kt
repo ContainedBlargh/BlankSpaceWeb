@@ -12,6 +12,8 @@ fun main(args: Array<String>) {
     PageContext.onReady {
         val contentDiv = document.getElementById("Content")
         if (contentDiv != null && contentDiv is HTMLDivElement){
+            //SHOULD PROBABLY STORE THE VIEWS IN A CONTAINER OF SORTS.
+            //GIVEN THAT WE MIGHT WANNA CHANGE VIEWS.
             val homeView = HomeView(contentDiv)
         } else {
             error("No contentDiv found!")
