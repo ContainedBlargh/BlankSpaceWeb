@@ -6,10 +6,10 @@ var BlankSpaceWeb = function (_, Kotlin) {
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var println = Kotlin.kotlin.io.println_s8jyv4$;
   var Unit = Kotlin.kotlin.Unit;
-  var NotImplementedError = Kotlin.kotlin.NotImplementedError;
+  var throwCCE = Kotlin.throwCCE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var EventListener = Kotlin.org.w3c.dom.events.EventListener_gbr1zf$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var EventListener = Kotlin.org.w3c.dom.events.EventListener_gbr1zf$;
   var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
@@ -37,11 +37,36 @@ var BlankSpaceWeb = function (_, Kotlin) {
   }
   function HomeController(view) {
   }
+  function HomeController$createNewCanvas$lambda(closure$req, this$HomeController) {
+    return function (f) {
+      var tmp$, tmp$_0;
+      var token = closure$req.response.token;
+      tmp$_0 = typeof (tmp$ = token) === 'string' ? tmp$ : throwCCE();
+      this$HomeController.connectToCanvas_61zpoe$(tmp$_0);
+    };
+  }
+  function HomeController$createNewCanvas$lambda_0(this$HomeController) {
+    return function (f) {
+      this$HomeController.handleNetworkError();
+    };
+  }
   HomeController.prototype.createNewCanvas = function () {
-    throw new NotImplementedError('Should create a new canvas with the API and then display this canvas.');
+    var req = new XMLHttpRequest();
+    req.responseType = 'json';
+    req.open('POST', 'http://blankspaceapi.azurewebsites.net/api/v1/canvas', true);
+    req.onreadystatechange = HomeController$createNewCanvas$lambda(req, this);
+    req.onerror = HomeController$createNewCanvas$lambda_0(this);
+    req.send();
+  };
+  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
+  HomeController.prototype.handleNetworkError = function () {
+    throw new NotImplementedError_init('An operation is not implemented: ' + 'Handle network errors by displaying something on the main page.\nThis is PageContext territory imo.');
   };
   HomeController.prototype.connectToCanvas_61zpoe$ = function (canvasToken) {
-    throw new NotImplementedError('Should connect to a canvas by setting up a new canvas page.');
+    var req = new XMLHttpRequest();
+    req.responseType = 'json';
+    req.open('GET', Config_getInstance().SERVER_ADDRESS + '/api/v1/canvas/' + canvasToken);
+    throw new NotImplementedError_init('An operation is not implemented: ' + 'Navigate to this canvas');
   };
   HomeController.$metadata$ = {
     kind: Kind_CLASS,
@@ -55,6 +80,22 @@ var BlankSpaceWeb = function (_, Kotlin) {
     simpleName: 'SignalRController',
     interfaces: []
   };
+  function Config() {
+    Config_instance = this;
+    this.SERVER_ADDRESS = 'http://blankspaceapi.azurewebsites.net';
+  }
+  Config.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Config',
+    interfaces: []
+  };
+  var Config_instance = null;
+  function Config_getInstance() {
+    if (Config_instance === null) {
+      new Config();
+    }
+    return Config_instance;
+  }
   function PageContext() {
     PageContext$Companion_getInstance();
   }
@@ -102,15 +143,12 @@ var BlankSpaceWeb = function (_, Kotlin) {
     interfaces: [IllegalArgumentException]
   };
   PageContext.prototype.bind_3nk6j2$ = defineInlineFunction('BlankSpaceWeb.util.PageContext.bind_3nk6j2$', wrapFunction(function () {
-    var println = Kotlin.kotlin.io.println_s8jyv4$;
     var getKClass = Kotlin.getKClass;
     var ensureNotNull = Kotlin.ensureNotNull;
     var PageContext$PageContext$BindException_init = _.util.PageContext.BindException;
     return function (T_0, isT, id) {
       var tmp$;
-      println('F: ' + id);
       var element = document.getElementById(id);
-      println(element);
       if (element != null && isT(element)) {
         tmp$ = element;
       }
@@ -136,7 +174,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
   }
   AbstractView.prototype.initialize_z7ldv0$_0 = function () {
     println('Inserting html by calling abstract method!');
-    this.div.innerHTML = this.initialMarkup();
+    this.div.innerHTML = this.markup();
     println('Binding markup with abstract method!');
     PageContext$Companion_getInstance().onLoad_sk443n$(AbstractView$initialize$lambda(this));
   };
@@ -160,16 +198,14 @@ var BlankSpaceWeb = function (_, Kotlin) {
       this.canvas_e8ag9y$_0 = canvas;
     }
   });
-  CanvasView.prototype.initialMarkup = function () {
+  CanvasView.prototype.markup = function () {
     return '\n            <div id="CanvasContent">\n                <canvas id="Canvas"><\/canvas>\n            <\/div>\n            ';
   };
   var getKClass = Kotlin.getKClass;
   var ensureNotNull = Kotlin.ensureNotNull;
   CanvasView.prototype.init_eqtm98$ = function (pageContext) {
     var tmp$;
-    println('F: ' + 'Canvas');
     var element = document.getElementById('Canvas');
-    println(element);
     if (element != null && Kotlin.isType(element, HTMLCanvasElement)) {
       tmp$ = element;
     }
@@ -189,7 +225,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.createButton_5xjqxh$_0 = this.createButton_5xjqxh$_0;
     this.connectButton_izkdwh$_0 = this.connectButton_izkdwh$_0;
   }
-  HomeView.prototype.initialMarkup = function () {
+  HomeView.prototype.markup = function () {
     println('Setting up initial markup for HomeView!');
     return '\n            <div id="HomeContent">\n                <div>\n                    <label id="TokenLabel">Token:<\/label>\n                    <input type="text" id="TokenField" maxLength="4"><\/input>\n                <\/div>\n                <div>\n                    <button id="CreateButton">Create new Canvas<\/button>\n                    <button id="ConnectButton">Connect to Canvas<\/button>\n                <\/div>\n            <\/div>\n            ';
   };
@@ -241,9 +277,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     println('Binding HomeView!');
     var id = 'TokenField';
     var tmp$;
-    println('F: ' + id);
     var element = document.getElementById(id);
-    println(element);
     if (element != null && Kotlin.isType(element, HTMLInputElement)) {
       tmp$ = element;
     }
@@ -252,9 +286,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.tokenField_0 = tmp$;
     var id_0 = 'CreateButton';
     var tmp$_0;
-    println('F: ' + id_0);
     var element_0 = document.getElementById(id_0);
-    println(element_0);
     if (element_0 != null && Kotlin.isType(element_0, HTMLButtonElement)) {
       tmp$_0 = element_0;
     }
@@ -263,9 +295,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.createButton_0 = tmp$_0;
     var id_1 = 'ConnectButton';
     var tmp$_1;
-    println('F: ' + id_1);
     var element_1 = document.getElementById(id_1);
-    println(element_1);
     if (element_1 != null && Kotlin.isType(element_1, HTMLButtonElement)) {
       tmp$_1 = element_1;
     }
@@ -291,11 +321,14 @@ var BlankSpaceWeb = function (_, Kotlin) {
   package$controller.HomeController = HomeController;
   var package$signalling = _.signalling || (_.signalling = {});
   package$signalling.SignalRController = SignalRController;
+  var package$util = _.util || (_.util = {});
+  Object.defineProperty(package$util, 'Config', {
+    get: Config_getInstance
+  });
   Object.defineProperty(PageContext, 'Companion', {
     get: PageContext$Companion_getInstance
   });
   PageContext.BindException = PageContext$BindException;
-  var package$util = _.util || (_.util = {});
   package$util.PageContext = PageContext;
   var package$view = _.view || (_.view = {});
   package$view.AbstractView = AbstractView;
