@@ -37,29 +37,27 @@ var BlankSpaceWeb = function (_, Kotlin) {
       this$HomeController.connectToCanvas_61zpoe$(tmp$_0);
     };
   }
-  function HomeController$createNewCanvas$lambda_0(this$HomeController) {
-    return function (f) {
-      this$HomeController.handleNetworkError();
-    };
-  }
   HomeController.prototype.createNewCanvas = function () {
     var req = new XMLHttpRequest();
     req.responseType = 'json';
-    req.open('POST', 'http://blankspaceapi.azurewebsites.net/api/v1/canvas', true);
+    req.open('POST', 'http://localhost:5678/api/v1/canvas', true);
     req.onreadystatechange = HomeController$createNewCanvas$lambda(req, this);
-    req.onerror = HomeController$createNewCanvas$lambda_0(this);
     req.send();
   };
-  HomeController.prototype.handleNetworkError = function () {
-    var reason = 'Handle network errors by displaying something on the main page.\nThis is PageContext territory imo.';
-    throw new Kotlin.kotlin.NotImplementedError('An operation is not implemented: ' + reason);
-  };
+  function HomeController$connectToCanvas$lambda(closure$req) {
+    return function (f) {
+      var canvasDTO = closure$req.response;
+      if (canvasDTO != null) {
+        println(JSON.stringify(canvasDTO));
+      }
+    };
+  }
   HomeController.prototype.connectToCanvas_61zpoe$ = function (canvasToken) {
     var req = new XMLHttpRequest();
     req.responseType = 'json';
     req.open('GET', Config_getInstance().SERVER_ADDRESS + '/api/v1/canvas/' + canvasToken);
-    var reason = 'Navigate to this canvas';
-    throw new Kotlin.kotlin.NotImplementedError('An operation is not implemented: ' + reason);
+    req.onreadystatechange = HomeController$connectToCanvas$lambda(req);
+    req.send();
   };
   HomeController.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -75,7 +73,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
   };
   function Config() {
     Config_instance = this;
-    this.SERVER_ADDRESS = 'http://blankspaceapi.azurewebsites.net';
+    this.SERVER_ADDRESS = 'http://localhost:5678';
   }
   Config.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -258,7 +256,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.connectButton_0.onclick = HomeView$init$lambda_1(this);
   };
   HomeView.prototype.handleConnectButtonClick_0 = function () {
-    var token = this.tokenField_0.value;
+    var token = this.tokenField_0.value.toUpperCase();
     println('Attempting to connect to ' + token + '...');
     this.controller_0.connectToCanvas_61zpoe$(token);
     println('Connected!');

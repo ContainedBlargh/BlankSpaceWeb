@@ -1,5 +1,5 @@
 package util
 
 object Config {
-    val SERVER_ADDRESS = "http://blankspaceapi.azurewebsites.net"
+    val SERVER_ADDRESS = "http://localhost:5678"
 }

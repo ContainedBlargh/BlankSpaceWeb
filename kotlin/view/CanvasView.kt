@@ -5,7 +5,7 @@ import org.w3c.dom.HTMLDivElement
 import signalling.SignalRController
 import util.PageContext
 
-class CanvasView(div: HTMLDivElement, val signalRController: SignalRController) : AbstractView(div) {
+class CanvasView(div: HTMLDivElement, val token: String, val signalRController: SignalRController) : AbstractView(div) {
 
     private lateinit var canvas: HTMLCanvasElement
 
