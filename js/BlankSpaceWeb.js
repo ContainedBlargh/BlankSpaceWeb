@@ -5,31 +5,23 @@ var BlankSpaceWeb = function (_, Kotlin) {
   'use strict';
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var Unit = Kotlin.kotlin.Unit;
-  var throwCCE = Kotlin.throwCCE;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var EventListener = Kotlin.org.w3c.dom.events.EventListener_gbr1zf$;
   var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
-  var throwUPAE = Kotlin.throwUPAE;
   PageContext$BindException.prototype = Object.create(IllegalArgumentException.prototype);
   PageContext$BindException.prototype.constructor = PageContext$BindException;
   CanvasView.prototype = Object.create(AbstractView.prototype);
   CanvasView.prototype.constructor = CanvasView;
   HomeView.prototype = Object.create(AbstractView.prototype);
   HomeView.prototype.constructor = HomeView;
-  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException;
   function main$lambda() {
     var contentDiv = document.getElementById('Content');
     if (contentDiv != null && Kotlin.isType(contentDiv, HTMLDivElement)) {
       var homeView = new HomeView(contentDiv);
     }
      else {
-      throw new IllegalStateException_init('No contentDiv found!'.toString());
+      var message = 'No contentDiv found!';
+      throw new Kotlin.kotlin.IllegalStateException(message.toString());
     }
-    return Unit;
   }
   function main(args) {
     println('Main function running...!');
@@ -41,7 +33,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     return function (f) {
       var tmp$, tmp$_0;
       var token = closure$req.response.token;
-      tmp$_0 = typeof (tmp$ = token) === 'string' ? tmp$ : throwCCE();
+      tmp$_0 = typeof (tmp$ = token) === 'string' ? tmp$ : Kotlin.throwCCE();
       this$HomeController.connectToCanvas_61zpoe$(tmp$_0);
     };
   }
@@ -58,25 +50,26 @@ var BlankSpaceWeb = function (_, Kotlin) {
     req.onerror = HomeController$createNewCanvas$lambda_0(this);
     req.send();
   };
-  var NotImplementedError_init = Kotlin.kotlin.NotImplementedError;
   HomeController.prototype.handleNetworkError = function () {
-    throw new NotImplementedError_init('An operation is not implemented: ' + 'Handle network errors by displaying something on the main page.\nThis is PageContext territory imo.');
+    var reason = 'Handle network errors by displaying something on the main page.\nThis is PageContext territory imo.';
+    throw new Kotlin.kotlin.NotImplementedError('An operation is not implemented: ' + reason);
   };
   HomeController.prototype.connectToCanvas_61zpoe$ = function (canvasToken) {
     var req = new XMLHttpRequest();
     req.responseType = 'json';
     req.open('GET', Config_getInstance().SERVER_ADDRESS + '/api/v1/canvas/' + canvasToken);
-    throw new NotImplementedError_init('An operation is not implemented: ' + 'Navigate to this canvas');
+    var reason = 'Navigate to this canvas';
+    throw new Kotlin.kotlin.NotImplementedError('An operation is not implemented: ' + reason);
   };
   HomeController.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'HomeController',
     interfaces: []
   };
   function SignalRController() {
   }
   SignalRController.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'SignalRController',
     interfaces: []
   };
@@ -85,7 +78,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.SERVER_ADDRESS = 'http://blankspaceapi.azurewebsites.net';
   }
   Config.$metadata$ = {
-    kind: Kind_OBJECT,
+    kind: Kotlin.Kind.OBJECT,
     simpleName: 'Config',
     interfaces: []
   };
@@ -106,7 +99,6 @@ var BlankSpaceWeb = function (_, Kotlin) {
     return function (f) {
       println('DOMContentLoaded!');
       closure$action();
-      return Unit;
     };
   }
   PageContext$Companion.prototype.onReady_o14v8n$ = function (action) {
@@ -115,14 +107,13 @@ var BlankSpaceWeb = function (_, Kotlin) {
   function PageContext$Companion$onLoad$lambda(closure$action) {
     return function (f) {
       closure$action(new PageContext());
-      return Unit;
     };
   }
   PageContext$Companion.prototype.onLoad_sk443n$ = function (action) {
     window.addEventListener('load', EventListener(PageContext$Companion$onLoad$lambda(action)));
   };
   PageContext$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
+    kind: Kotlin.Kind.OBJECT,
     simpleName: 'Companion',
     interfaces: []
   };
@@ -138,172 +129,133 @@ var BlankSpaceWeb = function (_, Kotlin) {
     this.name = 'PageContext$BindException';
   }
   PageContext$BindException.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'BindException',
     interfaces: [IllegalArgumentException]
   };
-  PageContext.prototype.bind_3nk6j2$ = defineInlineFunction('BlankSpaceWeb.util.PageContext.bind_3nk6j2$', wrapFunction(function () {
-    var getKClass = Kotlin.getKClass;
-    var ensureNotNull = Kotlin.ensureNotNull;
-    var PageContext$PageContext$BindException_init = _.util.PageContext.BindException;
-    return function (T_0, isT, id) {
-      var tmp$;
-      var element = document.getElementById(id);
-      if (element != null && isT(element)) {
-        tmp$ = element;
-      }
-       else
-        throw new PageContext$PageContext$BindException_init('No element with id: ' + id + ' bindable to type ' + ensureNotNull(getKClass(T_0).simpleName) + '!');
-      return tmp$;
-    };
-  }));
+  PageContext.prototype.bind_3nk6j2$ = Kotlin.defineInlineFunction('BlankSpaceWeb.util.PageContext.bind_3nk6j2$', function (T_0, isT, id) {
+    var tmp$, tmp$_0;
+    var element = document.getElementById(id);
+    if (element != null && isT(element)) {
+      tmp$_0 = element;
+    }
+     else {
+      throw new _.util.PageContext.BindException('No element with id: ' + id + ' bindable to type ' + ((tmp$ = Kotlin.getKClass(T_0).simpleName) != null ? tmp$ : Kotlin.throwNPE()) + '!');
+    }
+    return tmp$_0;
+  });
   PageContext.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'PageContext',
     interfaces: []
   };
   function AbstractView(div) {
     this.div = div;
-    this.initialize_z7ldv0$_0();
+    this.initialize_h4b71y$_0();
   }
   function AbstractView$initialize$lambda(this$AbstractView) {
     return function (pageContext) {
       this$AbstractView.init_eqtm98$(pageContext);
-      return Unit;
     };
   }
-  AbstractView.prototype.initialize_z7ldv0$_0 = function () {
+  AbstractView.prototype.initialize_h4b71y$_0 = function () {
     println('Inserting html by calling abstract method!');
     this.div.innerHTML = this.markup();
     println('Binding markup with abstract method!');
     PageContext$Companion_getInstance().onLoad_sk443n$(AbstractView$initialize$lambda(this));
   };
   AbstractView.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'AbstractView',
     interfaces: []
   };
   function CanvasView(div, signalRController) {
     AbstractView.call(this, div);
     this.signalRController = signalRController;
-    this.canvas_e8ag9y$_0 = this.canvas_e8ag9y$_0;
+    this.canvas_0 = this.canvas_0;
   }
-  Object.defineProperty(CanvasView.prototype, 'canvas_0', {
-    get: function () {
-      if (this.canvas_e8ag9y$_0 == null)
-        return throwUPAE('canvas');
-      return this.canvas_e8ag9y$_0;
-    },
-    set: function (canvas) {
-      this.canvas_e8ag9y$_0 = canvas;
-    }
-  });
   CanvasView.prototype.markup = function () {
     return '\n            <div id="CanvasContent">\n                <canvas id="Canvas"><\/canvas>\n            <\/div>\n            ';
   };
-  var getKClass = Kotlin.getKClass;
-  var ensureNotNull = Kotlin.ensureNotNull;
   CanvasView.prototype.init_eqtm98$ = function (pageContext) {
-    var tmp$;
+    var tmp$, tmp$_0;
     var element = document.getElementById('Canvas');
     if (element != null && Kotlin.isType(element, HTMLCanvasElement)) {
-      tmp$ = element;
+      tmp$_0 = element;
     }
-     else
-      throw new PageContext$BindException('No element with id: ' + 'Canvas' + ' bindable to type ' + ensureNotNull(getKClass(HTMLCanvasElement).simpleName) + '!');
-    this.canvas_0 = tmp$;
+     else {
+      throw new _.util.PageContext.BindException('No element with id: ' + 'Canvas' + ' bindable to type ' + ((tmp$ = Kotlin.getKClass(HTMLCanvasElement).simpleName) != null ? tmp$ : Kotlin.throwNPE()) + '!');
+    }
+    this.canvas_0 = tmp$_0;
   };
   CanvasView.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'CanvasView',
     interfaces: [AbstractView]
   };
   function HomeView(div) {
     AbstractView.call(this, div);
     this.controller_0 = new HomeController(this);
-    this.tokenField_gv17vs$_0 = this.tokenField_gv17vs$_0;
-    this.createButton_5xjqxh$_0 = this.createButton_5xjqxh$_0;
-    this.connectButton_izkdwh$_0 = this.connectButton_izkdwh$_0;
+    this.tokenField_0 = this.tokenField_0;
+    this.createButton_0 = this.createButton_0;
+    this.connectButton_0 = this.connectButton_0;
   }
   HomeView.prototype.markup = function () {
     println('Setting up initial markup for HomeView!');
     return '\n            <div id="HomeContent">\n                <div>\n                    <label id="TokenLabel">Token:<\/label>\n                    <input type="text" id="TokenField" maxLength="4"><\/input>\n                <\/div>\n                <div>\n                    <button id="CreateButton">Create new Canvas<\/button>\n                    <button id="ConnectButton">Connect to Canvas<\/button>\n                <\/div>\n            <\/div>\n            ';
   };
-  Object.defineProperty(HomeView.prototype, 'tokenField_0', {
-    get: function () {
-      if (this.tokenField_gv17vs$_0 == null)
-        return throwUPAE('tokenField');
-      return this.tokenField_gv17vs$_0;
-    },
-    set: function (tokenField) {
-      this.tokenField_gv17vs$_0 = tokenField;
-    }
-  });
-  Object.defineProperty(HomeView.prototype, 'createButton_0', {
-    get: function () {
-      if (this.createButton_5xjqxh$_0 == null)
-        return throwUPAE('createButton');
-      return this.createButton_5xjqxh$_0;
-    },
-    set: function (createButton) {
-      this.createButton_5xjqxh$_0 = createButton;
-    }
-  });
-  Object.defineProperty(HomeView.prototype, 'connectButton_0', {
-    get: function () {
-      if (this.connectButton_izkdwh$_0 == null)
-        return throwUPAE('connectButton');
-      return this.connectButton_izkdwh$_0;
-    },
-    set: function (connectButton) {
-      this.connectButton_izkdwh$_0 = connectButton;
-    }
-  });
   function HomeView$init$lambda(this$HomeView) {
-    return function (f) {
-      println('CreateButton fired!');
-      this$HomeView.controller_0.createNewCanvas();
-      return Unit;
+    return function (it) {
+      this$HomeView.tokenField_0.value = this$HomeView.tokenField_0.value.toUpperCase();
     };
   }
   function HomeView$init$lambda_0(this$HomeView) {
     return function (f) {
+      println('CreateButton fired!');
+      this$HomeView.controller_0.createNewCanvas();
+    };
+  }
+  function HomeView$init$lambda_1(this$HomeView) {
+    return function (f) {
       println('ConnectButton fired!');
       this$HomeView.handleConnectButtonClick_0();
-      return Unit;
     };
   }
   HomeView.prototype.init_eqtm98$ = function (pageContext) {
     println('Binding HomeView!');
     var id = 'TokenField';
-    var tmp$;
+    var tmp$, tmp$_0;
     var element = document.getElementById(id);
     if (element != null && Kotlin.isType(element, HTMLInputElement)) {
-      tmp$ = element;
+      tmp$_0 = element;
     }
-     else
-      throw new PageContext$BindException('No element with id: ' + id + ' bindable to type ' + ensureNotNull(getKClass(HTMLInputElement).simpleName) + '!');
-    this.tokenField_0 = tmp$;
+     else {
+      throw new _.util.PageContext.BindException('No element with id: ' + id + ' bindable to type ' + ((tmp$ = Kotlin.getKClass(HTMLInputElement).simpleName) != null ? tmp$ : Kotlin.throwNPE()) + '!');
+    }
+    this.tokenField_0 = tmp$_0;
     var id_0 = 'CreateButton';
-    var tmp$_0;
+    var tmp$_1, tmp$_2;
     var element_0 = document.getElementById(id_0);
     if (element_0 != null && Kotlin.isType(element_0, HTMLButtonElement)) {
-      tmp$_0 = element_0;
+      tmp$_2 = element_0;
     }
-     else
-      throw new PageContext$BindException('No element with id: ' + id_0 + ' bindable to type ' + ensureNotNull(getKClass(HTMLButtonElement).simpleName) + '!');
-    this.createButton_0 = tmp$_0;
+     else {
+      throw new _.util.PageContext.BindException('No element with id: ' + id_0 + ' bindable to type ' + ((tmp$_1 = Kotlin.getKClass(HTMLButtonElement).simpleName) != null ? tmp$_1 : Kotlin.throwNPE()) + '!');
+    }
+    this.createButton_0 = tmp$_2;
     var id_1 = 'ConnectButton';
-    var tmp$_1;
+    var tmp$_3, tmp$_4;
     var element_1 = document.getElementById(id_1);
     if (element_1 != null && Kotlin.isType(element_1, HTMLButtonElement)) {
-      tmp$_1 = element_1;
+      tmp$_4 = element_1;
     }
-     else
-      throw new PageContext$BindException('No element with id: ' + id_1 + ' bindable to type ' + ensureNotNull(getKClass(HTMLButtonElement).simpleName) + '!');
-    this.connectButton_0 = tmp$_1;
-    this.createButton_0.onclick = HomeView$init$lambda(this);
-    this.connectButton_0.onclick = HomeView$init$lambda_0(this);
+     else {
+      throw new _.util.PageContext.BindException('No element with id: ' + id_1 + ' bindable to type ' + ((tmp$_3 = Kotlin.getKClass(HTMLButtonElement).simpleName) != null ? tmp$_3 : Kotlin.throwNPE()) + '!');
+    }
+    this.connectButton_0 = tmp$_4;
+    this.tokenField_0.addEventListener('input', EventListener(HomeView$init$lambda(this)));
+    this.createButton_0.onclick = HomeView$init$lambda_0(this);
+    this.connectButton_0.onclick = HomeView$init$lambda_1(this);
   };
   HomeView.prototype.handleConnectButtonClick_0 = function () {
     var token = this.tokenField_0.value;
@@ -312,7 +264,7 @@ var BlankSpaceWeb = function (_, Kotlin) {
     println('Connected!');
   };
   HomeView.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kotlin.Kind.CLASS,
     simpleName: 'HomeView',
     interfaces: [AbstractView]
   };

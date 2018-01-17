@@ -4,6 +4,7 @@ import controller.HomeController
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.events.EventListener
 import util.PageContext
 
 class HomeView(div: HTMLDivElement): AbstractView(div) {
@@ -33,12 +34,17 @@ class HomeView(div: HTMLDivElement): AbstractView(div) {
         tokenField = pageContext.bind("TokenField")
         createButton = pageContext.bind("CreateButton")
         connectButton = pageContext.bind("ConnectButton")
+        tokenField.addEventListener("input",
+                EventListener {
+                    tokenField.value = tokenField.value.toUpperCase()
+                }
+        )
         createButton.onclick = { _ -> println("CreateButton fired!"); controller.createNewCanvas() }
         connectButton.onclick = { _ -> println("ConnectButton fired!"); handleConnectButtonClick() }
     }
 
     private fun handleConnectButtonClick(){
-        val token = tokenField.value
+        val token = tokenField.value.toUpperCase()
         println("Attempting to connect to $token...")
         controller.connectToCanvas(token)
         println("Connected!")

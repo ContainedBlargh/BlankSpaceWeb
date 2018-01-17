@@ -35,7 +35,6 @@ class HomeController(view: HomeView) {
         //DISPLAY THE CANVAS
         TODO("Navigate to this canvas")
 
-
         req.send()
     }
 }
