@@ -20,5 +20,6 @@ class CanvasView(div: HTMLDivElement, val token: String, val signalRController: 
 
     override fun init(pageContext: PageContext) {
         canvas = pageContext.bind("Canvas")
+        model = CanvasModel()
     }
 }
