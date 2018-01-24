@@ -9,21 +9,20 @@ import util.PageContext
 
 class HomeView(div: HTMLDivElement): AbstractView(div) {
 
-    override fun markup(): String {
-        println("Setting up initial markup for HomeView!")
-        return """
-            <div id="HomeContent">
-                <div>
-                    <label id="TokenLabel">Token:</label>
-                    <input type="text" id="TokenField" maxLength="4"></input>
-                </div>
-                <div>
-                    <button id="CreateButton">Create new Canvas</button>
-                    <button id="ConnectButton">Connect to Canvas</button>
-                </div>
+    override fun markup() =
+        """
+        <div id="HomeContent">
+            <div>
+                <label id="TokenLabel">Token:</label>
+                <input type="text" id="TokenField" maxLength="4"></input>
             </div>
-            """
-    }
+            <div>
+                <button id="CreateButton">Create new Canvas</button>
+                <button id="ConnectButton">Connect to Canvas</button>
+            </div>
+        </div>
+        """
+
     private val controller = HomeController(this)
     private lateinit var tokenField: HTMLInputElement
     private lateinit var createButton: HTMLButtonElement

@@ -11,13 +11,13 @@ class CanvasView(div: HTMLDivElement, val token: String, val signalRController: 
     private lateinit var canvas: HTMLCanvasElement
     private lateinit var model: CanvasModel
 
-    override fun markup(): String {
-        return """
-            <div id="CanvasContent">
-                <canvas id="Canvas"></canvas>
-            </div>
-            """
-    }
+    override fun markup() =
+        """
+        <div id="CanvasContent">
+            <canvas id="Canvas"></canvas>
+        </div>
+        """
+
     override fun init(pageContext: PageContext) {
         canvas = pageContext.bind("Canvas")
     }
