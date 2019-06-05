@@ -1,3 +1,3 @@
 package model.canvas
 
-class Hitbox(val x: Float, val y: Float, val width: Float, val height: Float)
+data class Hitbox(val left: Double, val top: Double, val right: Double, val bottom: Double)
